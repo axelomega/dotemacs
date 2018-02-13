@@ -103,6 +103,31 @@
                            "^%Warning[[:upper:]-]*:[[:space:]]*\\([[:alnum:]/_.]+\\):\\([[:digit:]]+\\)"
                            1 2 nil 1))))
 
+;;Compilation mode regexp for Vivado
+(add-hook 'compilation-mode-hook
+          (lambda ()
+            (add-to-list 'compilation-error-regexp-alist 'vivado-error)
+            (add-to-list 'compilation-error-regexp-alist-alist
+                         '(vivado-error
+                           "^ERROR:.*\\[\\([/_\\.[:alnum:]]*\\):\\([[:digit:]]*\\)"
+                           1 2 nil 2))))
+
+(add-hook 'compilation-mode-hook
+          (lambda ()
+            (add-to-list 'compilation-error-regexp-alist 'vivado-warning)
+            (add-to-list 'compilation-error-regexp-alist-alist
+                         '(vivado-warning
+                           "^WARNING:.*\\[\\([/_\\.[:alnum:]]*\\):\\([[:digit:]]*\\)"
+                           1 2 nil 1))))
+
+(add-hook 'compilation-mode-hook
+          (lambda ()
+            (add-to-list 'compilation-error-regexp-alist 'vivado-info)
+            (add-to-list 'compilation-error-regexp-alist-alist
+                         '(vivado-info
+                           "^INFO:.*\\[\\([/_\\.[:alnum:]]*\\):\\([[:digit:]]*\\)"
+                           1 2 nil 0))))
+
 ;; C/C++ settings
 (add-hook 'c-mode-common-hook 'flyspell-prog-mode)
 
@@ -301,5 +326,16 @@
 
 (with-eval-after-load 'flycheck
   (flycheck-pos-tip-mode))
+
+(with-eval-after-load 'flycheck
+  (require 'flycheck-clang-analyzer)
+  (flycheck-clang-analyzer-setup))
+
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-clang-tidy-setup))
+
+;; Mark certain columns
+(require 'column-marker)
+
 
 ;;; .emacs ends here
