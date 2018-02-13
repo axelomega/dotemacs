@@ -229,6 +229,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(elpy-modules
+   (quote
+    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(inhibit-startup-screen t)
  '(verilog-auto-lineup (quote ignore)))
 (custom-set-faces
@@ -236,8 +239,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(flymake-errline ((t nil)))
- )
+ '(flymake-errline ((t nil))))
 
 ;; ============ Non bundled packages ==========
 ;; Do initalize packes and load them last, after as many user settings as possible
