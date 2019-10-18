@@ -3,7 +3,6 @@
 ;; (mapcar #'(lambda(p) (add-to-list 'load-path p)) elisp-path)
 
 ;;; Code:
-
 (setq visible-bell t)
 (setq tab-width 4)
 
@@ -14,6 +13,10 @@
 (setq-default show-trailing-whitespace t)
 (set-face-background 'trailing-whitespace "gray15")
 (global-set-key (kbd "C-x C-<backspace>") 'delete-trailing-whitespace)
+
+;; History
+(savehist-mode 1)
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
 
 ;;Font
 (set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-11-*-*-*-*-*-*-*")
@@ -92,7 +95,7 @@
             (add-to-list 'compilation-error-regexp-alist 'verilator-error)
             (add-to-list 'compilation-error-regexp-alist-alist
                          '(verilator-error
-                           "^%Error:[[:space:]]*\\([[:alnum:]/_.]+\\):\\([[:digit:]]+\\)"
+                           "^%Error-?[A-Z]*:[[:space:]]+\\([[:alnum:]/_.]+\\):\\([[:digit:]]+\\)"
                            1 2 nil 2))))
 
 (add-hook 'compilation-mode-hook
@@ -128,6 +131,31 @@
                            "^INFO:.*\\[\\([/_\\.[:alnum:]]*\\):\\([[:digit:]]*\\)"
                            1 2 nil 0))))
 
+;;Compilation mode regexp for Xcelium
+(add-hook 'compilation-mode-hook
+          (lambda ()
+            (add-to-list 'compilation-error-regexp-alist 'xcelium-error)
+            (add-to-list 'compilation-error-regexp-alist-alist
+                         '(xcelium-error
+                           "^[^:]+: \\*E,[^(]+[ ]*(\\([[:alnum:]/_\\.]*\\),\\([[:digit:]]+\\)|\\([[:digit:]]+\\))"
+                           1 2 3 2))))
+
+;;(add-hook 'compilation-mode-hook
+;;          (lambda ()
+;;            (add-to-list 'compilation-error-regexp-alist 'xcelium-warning)
+;;            (add-to-list 'compilation-error-regexp-alist-alist
+;;                         '(xcelium-warning
+;;                           "^.*: \\*W,[^(]*(\\([[:alnum:]/_.]*\\),\\([[:digit:]]*\\)|\\([[:digit:]]*\\))"
+;;                           1 2 3 1))))
+
+;; (add-hook 'compilation-mode-hook
+;;           (lambda ()
+;;             (add-to-list 'compilation-error-regexp-alist 'xcelium-info)
+;;             (add-to-list 'compilation-error-regexp-alist-alist
+;;                          '(xcelium-info
+;;                            "^INFO:.*\\[\\([/_\\.[:alnum:]]*\\):\\([[:digit:]]*\\)"
+;;                            1 2 nil 0))))
+
 ;; C/C++ settings
 (add-hook 'c-mode-common-hook 'flyspell-prog-mode)
 
@@ -137,9 +165,9 @@
 (setq show-paren-delay 0)           ; how long to wait?
 (show-paren-mode t)                 ; turn paren-mode on
 (setq show-paren-style 'expression) ; alternatives are 'parenthesis' and 'mixed'
-(set-face-background 'show-paren-match-face "#000033")
-(set-face-attribute 'show-paren-match-face nil
-        :weight 'bold :underline nil :overline nil :slant 'normal)
+;;(set-face-background 'show-paren-match-face "#000033")
+;;(set-face-attribute 'show-paren-match-face nil
+;;        :weight 'bold :underline nil :overline nil :slant 'normal)
 
 ;; Zoom text
 (defun djcb-zoom (n)
@@ -254,15 +282,21 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(flycheck-verilator-include-path
+   (quote
+    ("/usr/scratch/dev/fpga/include" "/usr/scratch/dev/fpga/library" "/usr/scratch/dev/fpga")))
  '(inhibit-startup-screen t)
+ '(package-selected-packages
+   (quote
+    (ccls use-package slack undo-tree sml-modeline rainbow-delimiters projectile pabbrev multi-term magit lorem-ipsum highlight-chars framemove flycheck-pos-tip flycheck-color-mode-line flycheck-clang-tidy flycheck-clang-analyzer elpy column-marker column-enforce-mode auto-complete auctex ag)))
  '(verilog-auto-lineup (quote ignore)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(flymake-errline ((t nil)))
- )
+ '(flymake-errline ((t nil)) t)
+ '(flymake-error ((t nil))))
 
 ;; ============ Non bundled packages ==========
 ;; Do initalize packes and load them last, after as many user settings as possible
@@ -275,7 +309,12 @@
 ;; Projectile mode
 (require 'projectile)
 (projectile-mode)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (setq projectile-enable-caching t)
+(setq projectile-indexing-method 'hybrid)
+(setq projectile-generic-command "find . -type f -not -wholename '*rewritten/*' -not -wholename '*rewritten_xcelium/*' -not -wholename '*dse*/*' -not -wholename '*btrade/conf/*' -not -wholename '*/obj_dir/*' -print0")
+(setq projectile-git-command "find . -type f -not -wholename '*rewritten/*' -not -wholename '*rewritten_xcelium/*' -not -wholename '*dse*/*' -not -wholename '*btrade/conf/*' -not -wholename '*/obj_dir/*' -print0")
+(setq projectile-sort-order 'recently-active)
 
 ;;Easy frame switching
 (global-set-key (kbd "C-c o") 'other-frame)
@@ -337,5 +376,24 @@
 ;; Mark certain columns
 (require 'column-marker)
 
+;; ccls
+(use-package ccls
+  :config
+  (setq ccls-executable "/usr/local/hrt-localcoding/bin/ccls.linux")
+  )
 
+(use-package lsp
+  :defer t
+  :config
+  (setq
+  ;; set clangd path to shut up a complaint from lsp-mode
+   lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd"
+   lsp-ui-sideline-show-flycheck nil
+   lsp-enable-file-watchers nil)
+  :hook
+  ((c-mode c++-mode)
+   .
+   lsp))
 ;;; .emacs ends here
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
