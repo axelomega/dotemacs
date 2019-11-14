@@ -37,3 +37,8 @@
 
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i --simple-prompt")
+
+;;(require 'sublimity)
+;;(require 'sublimity-scroll)
+;;(require 'sublimity-map) ;; experimental
+;; (require 'sublimity-attractive)

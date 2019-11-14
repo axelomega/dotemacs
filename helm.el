@@ -19,3 +19,6 @@
 (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
 ;; From helm-swoop to helm-multi-swoop-all
 (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
+
+(setq tramp-default-method "ssh")
+;;(define-key global-map (kbd "C-c s") 'helm-tramp)
