@@ -15,3 +15,4 @@
 (load (per-get-fullpath "~/dotemacs/flycheck.el"))
 (load (per-get-fullpath "~/dotemacs/projectile.el"))
 (load (per-get-fullpath "~/dotemacs/helm.el"))
+(load (per-get-fullpath "~/dotemacs/ccls.el"))
