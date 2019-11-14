@@ -61,4 +61,5 @@
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
 (setq backup-by-copying t)
 
-
+;; Brows things in emacs
+(setq browse-url-browser-function 'eww-browse-url)
