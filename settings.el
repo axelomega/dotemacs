@@ -75,3 +75,7 @@
 
 ;; Brows things in emacs
 (setq browse-url-browser-function 'eww-browse-url)
+
+;;; Trim whitespaces
+(require 'ws-butler)
+(ws-butler-global-mode 1)
