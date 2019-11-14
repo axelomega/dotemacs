@@ -11,11 +11,23 @@
 
 ;;Font
 (set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-11-*-*-*-*-*-*-*")
+(add-to-list 'default-frame-alist '(font . "-unknown-DejaVu Sans Mono-normal-normal-normal-*-11-*-*-*-*-*-*-*"))
 
 ;; Color settings
-(set-background-color "gray20")
-(set-cursor-color "cyan")
-(set-foreground-color "gray80")
+(defun set-my-colors ()
+  (set-background-color "gray20")
+  (set-cursor-color "cyan")
+  (set-foreground-color "gray80"))
+
+(defun set-my-frame-colors (frame)
+  (select-frame frame)
+  (set-background-color "gray20")
+  (set-cursor-color "cyan")
+  (set-foreground-color "gray80"))
+
+(if (daemonp)
+	(add-hook 'after-make-frame-functions #'set-my-frame-colors)
+  (set-my-colors))
 
 ;;Use space not tabs
 (setq-default indent-tabs-mode nil)
