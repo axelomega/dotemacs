@@ -1,7 +1,7 @@
 ;; ccls
 (use-package ccls
   :config
-  (setq ccls-executable "/usr/local/hrt-localcoding/bin/ccls.linux"))
+  (setq ccls-executable my-settings-hrt-ccls-executable))
 
 (use-package lsp
   :defer t

@@ -22,3 +22,19 @@
 
 (setq tramp-default-method "ssh")
 ;;(define-key global-map (kbd "C-c s") 'helm-tramp)
+
+(use-package helm-jira
+  :config
+
+  (setq
+   ;; URL of your JIRA instance (should not end in a slash)
+   helm-jira-url my-settings-hrt-jira-url
+
+   ;; The username to use to log in to JIRA
+   helm-jira-username "per"
+
+   ;; The JIRA-project you want to interact with
+   helm-jira-project "FPGA"))
+
+(require 'helm-projectile)
+(helm-projectile-on)
