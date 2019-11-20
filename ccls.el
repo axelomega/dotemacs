@@ -1,7 +1,7 @@
 ;; ccls
 (use-package ccls
   :config
-  (setq ccls-executable my-settings-hrt-ccls-executable))
+  (setq ccls-executable my-settings-ccls-executable))
 
 (use-package lsp
   :defer t

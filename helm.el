@@ -28,7 +28,7 @@
 
   (setq
    ;; URL of your JIRA instance (should not end in a slash)
-   helm-jira-url my-settings-hrt-jira-url
+   helm-jira-url my-settings-jira-url
 
    ;; The username to use to log in to JIRA
    helm-jira-username "per"
