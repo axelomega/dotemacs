@@ -6,6 +6,7 @@
 
 (require 'ido)
 
+(load (per-get-fullpath "~/dotemacs/company.el"))
 (load (per-get-fullpath "~/dotemacs/settings.el"))
 (load (per-get-fullpath "~/dotemacs/packages.el"))
 (load (per-get-fullpath "~/dotemacs/ido.el"))

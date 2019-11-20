@@ -79,3 +79,7 @@
 ;;; Trim whitespaces
 (require 'ws-butler)
 (ws-butler-global-mode 1)
+
+;; History
+(savehist-mode 1)
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
