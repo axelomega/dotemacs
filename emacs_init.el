@@ -4,6 +4,10 @@
   (concat (file-name-directory (or load-file-name buffer-file-name)) @file-relative-path)
 )
 
+(send-string-to-terminal "Packages loaded ------:\n")
+(send-string-to-terminal (prin1-to-string package-activated-list))
+(send-string-to-terminal "\n-----------------------\n")
+
 (require 'ido)
 
 (load (per-get-fullpath "~/dotemacs/company.el"))
@@ -17,3 +21,4 @@
 (load (per-get-fullpath "~/dotemacs/projectile.el"))
 (load (per-get-fullpath "~/dotemacs/helm.el"))
 (load (per-get-fullpath "~/dotemacs/ccls.el"))
+
