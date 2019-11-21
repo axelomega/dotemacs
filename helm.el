@@ -31,10 +31,10 @@
    helm-jira-url my-settings-jira-url
 
    ;; The username to use to log in to JIRA
-   helm-jira-username "per"
+   helm-jira-username my-settings-jira-username
 
    ;; The JIRA-project you want to interact with
-   helm-jira-project "FPGA"))
+   helm-jira-project my-settings-jira-project))
 
 (require 'helm-projectile)
 (helm-projectile-on)
