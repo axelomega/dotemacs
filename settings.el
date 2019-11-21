@@ -77,8 +77,10 @@
 (setq browse-url-browser-function 'eww-browse-url)
 
 ;;; Trim whitespaces
-(require 'ws-butler)
-(ws-butler-global-mode 1)
+(use-package ws-butler
+  :ensure t
+  :config
+  (ws-butler-global-mode 1))
 
 ;; History
 (savehist-mode 1)

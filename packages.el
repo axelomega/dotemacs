@@ -1,7 +1,7 @@
-(require 'package)
-
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(use-package package
+  :config
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.milkbox.net/packages/") t))
 
 ;; Auto uptate packages
 (use-package auto-package-update
