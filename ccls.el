@@ -1,5 +1,7 @@
 ;; ccls
 (use-package ccls
+  :ensure t
+  :if my-settings-ccls-executable
   :config
   (setq ccls-executable my-settings-ccls-executable))
 

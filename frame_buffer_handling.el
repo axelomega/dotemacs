@@ -1,21 +1,23 @@
 ;;Unique buffer names
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'reverse)
-(setq uniquify-separator "#")
-(setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
-(setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
+(use-package uniquify
+  :config
+  (setq uniquify-buffer-name-style 'reverse)
+  (setq uniquify-separator "#")
+  (setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
+  (setq uniquify-ignore-buffers-re "^\\*")) ; don't muck with special buffers
 
 ;;Easy buffer switching
-(require 'windmove)
-(windmove-default-keybindings 'meta)
+(use-package windmove
+  :ensure t
+  :config
+  (windmove-default-keybindings 'meta))
 
 ;;No scroll bar, info to mode line
-(if (require 'sml-modeline nil 'noerror)    ;; use sml-modeline if available
-  (progn
-    (sml-modeline-mode 1)                   ;; show buffer pos in the mode line
-    (scroll-bar-mode -1))                   ;; turn off the scrollbar
-  (scroll-bar-mode 1)                       ;; otherwise, show a scrollbar...
-  (set-scroll-bar-mode 'right))             ;; ... on the right
+(use-package sml-modeline
+  :ensure t
+  :config
+  (sml-modeline-mode 1) ;; show buffer pos in the mode line
+  (scroll-bar-mode -1)) ;; turn off the scrollbar
 
 ;;Easy frame switching
 ;;;(global-set-key (kbd "C-c o") 'other-frame)
