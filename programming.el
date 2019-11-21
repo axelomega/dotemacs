@@ -3,23 +3,21 @@
 
 ;;Verilog mode stuff
 (add-hook 'verilog-mode-hook
-		  (lambda()
-			(setq verilog-indent-level              4
-				  verilog-indent-level-module       4
-				  verilog-indent-level-declaration  4
-				  verilog-indent-level-behavioral   4
-				  verilog-indent-level-directive    4
-				  verilog-indent-begin-after-if     nil
-				  verilog-indent-lists              t
-				  verilog-indent-declaration-macros nil
-				  verilog-case-indent               4
-				  verilog-cexp-indent               4
-				  verilog-auto-newline              nil
-				  verilog-minimum-comment-distance  12
-				  verilog-align-ifelse              t
-				  verilog-auto-endcomments          nil
-				  )
-			))
+	  (lambda()
+	    (setq verilog-indent-level              4
+		  verilog-indent-level-module       4
+		  verilog-indent-level-declaration  4
+		  verilog-indent-level-behavioral   4
+		  verilog-indent-level-directive    4
+		  verilog-indent-begin-after-if     nil
+		  verilog-indent-lists              t
+		  verilog-indent-declaration-macros nil
+		  verilog-case-indent               4
+		  verilog-cexp-indent               4
+		  verilog-auto-newline              nil
+		  verilog-minimum-comment-distance  12
+		  verilog-align-ifelse              t
+		  verilog-auto-endcomments          nil)))
 
 (add-hook 'verilog-mode-hook 'flyspell-prog-mode)
 
@@ -37,8 +35,3 @@
 
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i --simple-prompt")
-
-;;(require 'sublimity)
-;;(require 'sublimity-scroll)
-;;(require 'sublimity-map) ;; experimental
-;; (require 'sublimity-attractive)

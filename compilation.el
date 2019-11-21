@@ -10,12 +10,13 @@
 
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
+;; Quartus
 (add-hook 'compilation-mode-hook
           (lambda ()
             (add-to-list 'compilation-error-regexp-alist 'quartus-error)
             (add-to-list 'compilation-error-regexp-alist-alist
                          '(quartus-error
-                           "Error ([0-9]*):.*File:[[:space:]]*\\([[:alnum:]/_.]*\\)[[:space:]]*Line:[[:space:]]*\\([[:digit:]]*\\)"
+                           "^Error ([0-9]*):.*File:[[:space:]]*\\([[:alnum:]/_.]*\\)[[:space:]]*Line:[[:space:]]*\\([[:digit:]]*\\)"
                            1 2 nil 2))))
 
 (add-hook 'compilation-mode-hook
@@ -23,10 +24,10 @@
             (add-to-list 'compilation-error-regexp-alist 'quartus-warning)
             (add-to-list 'compilation-error-regexp-alist-alist
                          '(quartus-warning
-                           "Warning ([0-9]*):.*File:[[:space:]]*\\([[:alnum:]/_.]*\\)[[:space:]]*Line:[[:space:]]*\\([[:digit:]]*\\)"
+                           "^Warning ([0-9]*):.*File:[[:space:]]*\\([[:alnum:]/_.]*\\)[[:space:]]*Line:[[:space:]]*\\([[:digit:]]*\\)"
                            1 2 nil 1))))
 
-;;Compilation mode regexp for Riviera-PRO
+;; Riviera-PRO
 (add-hook 'compilation-mode-hook
           (lambda ()
             (add-to-list 'compilation-error-regexp-alist 'riviera-error)
@@ -43,7 +44,7 @@
                            "^WARNING.*\"\\([[:alnum:]./_]+\\)\"[[:space:]]+\\([[:digit:]]+\\)[[:space:]]+\\([[:digit:]]+\\)$"
                            1 2 3 1))))
 
-;;Compilation mode regexp for Verilator
+;; Verilator
 (add-hook 'compilation-mode-hook
           (lambda ()
             (add-to-list 'compilation-error-regexp-alist 'verilator-error)
@@ -60,7 +61,7 @@
                            "^%Warning[[:upper:]-]*:[[:space:]]*\\([[:alnum:]/_.]+\\):\\([[:digit:]]+\\)"
                            1 2 nil 1))))
 
-;;Compilation mode regexp for Vivado
+;; Vivado
 (add-hook 'compilation-mode-hook
           (lambda ()
             (add-to-list 'compilation-error-regexp-alist 'vivado-error)
