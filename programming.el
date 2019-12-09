@@ -31,4 +31,13 @@
   :config
   (elpy-enable)
   (setq python-shell-interpreter "ipython"
-        python-shell-interpreter-args "-i --simple-prompt"))
+        python-shell-interpreter-args "-i --simple-prompt")
+
+  (eval-after-load "elpy"
+    '(cl-dolist (key '("M-<up>" "M-<down>" "M-<left>" "M-<right>"))
+       (define-key elpy-mode-map (kbd key) nil)))
+
+  (add-hook 'elpy-mode-hook
+            (lambda ()
+              (define-key elpy-mode-map (kbd "C-M-<right>") 'elpy-nav-indent-shift-right)
+              (define-key elpy-mode-map (kbd "C-M-<left>") 'elpy-nav-indent-shift-left))))

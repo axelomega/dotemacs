@@ -74,7 +74,7 @@
 (setq backup-by-copying t)
 
 ;; Brows things in emacs
-(setq browse-url-browser-function 'eww-browse-url)
+;(setq browse-url-browser-function 'eww-browse-url)
 
 ;;; Trim whitespaces
 (use-package ws-butler
