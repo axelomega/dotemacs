@@ -10,8 +10,8 @@
 (global-set-key (kbd "C-x C-<backspace>") 'delete-trailing-whitespace)
 
 ;;Font
-(set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-11-*-*-*-*-*-*-*")
-(add-to-list 'default-frame-alist '(font . "-unknown-DejaVu Sans Mono-normal-normal-normal-*-11-*-*-*-*-*-*-*"))
+;(set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-*-*-*-*")
+;(add-to-list 'default-frame-alist '(font . "-unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-*-*-*-*"))
 
 ;; Color settings
 (defun set-my-colors ()
@@ -74,7 +74,7 @@
 (setq backup-by-copying t)
 
 ;; Brows things in emacs
-;(setq browse-url-browser-function 'eww-browse-url)
+(setq browse-url-browser-function 'eww-browse-url)
 
 ;;; Trim whitespaces
 (use-package ws-butler

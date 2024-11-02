@@ -15,5 +15,4 @@
 (load (per-get-fullpath "~/dotemacs/projectile"))
 (load (per-get-fullpath "~/dotemacs/magit"))
 (load (per-get-fullpath "~/dotemacs/helm"))
-(load (per-get-fullpath "~/dotemacs/ccls"))
-(load (per-get-fullpath "~/dotemacs/slack"))
+;(load (per-get-fullpath "~/dotemacs/ccls"))
