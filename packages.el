@@ -1,7 +1,9 @@
 (use-package package
   :config
   (add-to-list 'package-archives
-               '("melpa" . "http://melpa.milkbox.net/packages/") t))
+               '("melpa" . "https://melpa.org/packages/") t))
+;;  (add-to-list 'package-archives
+;;               '("elpa" . "http://elpa.gnu.org/packages/") t))
 
 ;; Auto uptate packages
 (use-package auto-package-update
