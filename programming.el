@@ -33,6 +33,8 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((python-mode . lsp)
+         (c-mode . lsp)
+         (c++-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
 
@@ -48,6 +50,9 @@
 (use-package helm-lsp
   :ensure t
   :commands helm-lsp-workspace-symbol)
+
+(use-package helm-xref
+  :ensure t)
 
 (use-package dap-mode
     :ensure t)

@@ -9,3 +9,6 @@
   (setq projectile-generic-command my-settings-projectile-generic-command)
   (setq projectile-git-command my-settings-projectile-generic-command)
   (setq projectile-sort-order 'recently-active))
+
+(use-package treemacs-projectile
+  :ensure t)
