@@ -27,7 +27,6 @@
 (add-to-list 'eglot-server-programs
 	     `(python-mode . ("pyright-langserver" "--stdio")))
 
-
 (use-package lsp-mode
   :ensure t
   :init
@@ -88,6 +87,16 @@
                           (lsp))))  ; or lsp-deferred
 
 (use-package dap-python)
+
+;; C++ things
+(add-hook 'c++-mode-hook #'eglot-ensure)
+(add-to-list 'eglot-server-programs
+	     `(c++-mode . "clangd-16"))
+
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  (require 'dap-cpptools)
+  (yas-global-mode))
 
 ;;  '(cl-dolist (key '("M-<up>" "M-<down>" "M-<left>" "M-<right>"))
 ;;     (define-key elpy-mode-map (kbd key) nil))
